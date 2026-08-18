@@ -1,6 +1,6 @@
 {
   "name": "unlimited-pdf",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "UnlimitedPDF — a free, open-source, privacy-first PDF toolbox that processes files locally in Chrome. No uploads, no accounts, no server.",
   "license": "MIT",
@@ -28,7 +28,8 @@
     "fflate": "0.8.3",
     "pdf-lib": "1.17.1",
     "pdfjs-dist": "6.2.108",
-    "preact": "10.29.8"
+    "preact": "10.29.8",
+    "qpdf-wasm": "^0.1.0"
   },
   "devDependencies": {
     "@playwright/test": "1.62.1",

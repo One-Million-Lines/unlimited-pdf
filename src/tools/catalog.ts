@@ -4,7 +4,7 @@
  * ever exposed in production (spec §15, §21).
  */
 
-export type ToolCategory = 'Organize' | 'Convert' | 'Edit' | 'Optimize';
+export type ToolCategory = 'Organize' | 'Convert' | 'Edit' | 'Optimize' | 'Secure';
 
 /** What a tool needs to start: a single PDF, multiple PDFs, or images. */
 export type ToolInput = 'pdf' | 'pdfs' | 'images';
@@ -104,9 +104,25 @@ export const TOOLS: ToolDef[] = [
     warning:
       'Raster compression turns pages into images. Selectable text, links, forms, annotations and accessibility tags are lost. The original file is always kept.',
   },
+  {
+    id: 'protect',
+    name: 'Protect PDF',
+    short: 'Add an AES-256 password. Anyone opening the file will need this password.',
+    category: 'Secure',
+    input: 'pdf',
+    icon: 'lock',
+  },
+  {
+    id: 'unlock',
+    name: 'Unlock PDF',
+    short: 'Remove password protection when you know the password.',
+    category: 'Secure',
+    input: 'pdf',
+    icon: 'unlock',
+  },
 ];
 
-export const CATEGORIES: ToolCategory[] = ['Organize', 'Convert', 'Edit', 'Optimize'];
+export const CATEGORIES: ToolCategory[] = ['Organize', 'Convert', 'Edit', 'Optimize', 'Secure'];
 
 export function getTool(id: string): ToolDef | undefined {
   return TOOLS.find((t) => t.id === id);

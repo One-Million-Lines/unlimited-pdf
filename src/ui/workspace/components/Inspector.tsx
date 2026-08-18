@@ -50,6 +50,10 @@ function PanelFor({ tool, state }: { tool: string; state: WorkspaceState }) {
       return <OptimizePanel />;
     case 'compress':
       return <CompressPanel />;
+    case 'protect':
+      return <ProtectPanel />;
+    case 'unlock':
+      return <UnlockPanel />;
     default:
       return <OrganizePanel state={state} />;
   }
@@ -373,6 +377,126 @@ function CompressPanel() {
       </button>
     </div>
   );
+}
+
+/* -------------------------------- Protect ------------------------------- */
+
+function ProtectPanel() {
+  const store = getStore();
+  const [password, setPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [show, setShow] = useState(false);
+  const mismatch = confirm !== '' && password !== confirm;
+  const strength = scorePassword(password);
+
+  return (
+    <div>
+      <p class="small muted" style="margin-bottom:12px;">
+        Encrypts the PDF with AES-256. Anyone opening the file will need this password.
+        A distinct owner password is generated automatically. The original file is always kept.
+      </p>
+      <Field label="Password">
+        <div style="position:relative;">
+          <input
+            type={show ? 'text' : 'password'}
+            value={password}
+            onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
+            autocomplete="new-password"
+            style="padding-right:40px;"
+          />
+          <button
+            type="button"
+            class="btn btn-ghost btn-sm"
+            style="position:absolute;right:4px;top:50%;transform:translateY(-50%);padding:4px 7px;"
+            onClick={() => setShow((s) => !s)}
+            aria-label={show ? 'Hide password' : 'Show password'}
+          >
+            {show ? '🙈' : '👁'}
+          </button>
+        </div>
+      </Field>
+      {password && (
+        <div style="margin:-6px 0 10px;">
+          <div style={`height:4px;border-radius:2px;background:${['var(--danger)','var(--warn)','var(--ok)'][strength]};width:${(strength+1)*33}%;transition:width .2s;`} />
+          <span class="small muted">{['Weak','Fair','Strong'][strength]}</span>
+        </div>
+      )}
+      <Field label="Confirm password">
+        <input
+          type={show ? 'text' : 'password'}
+          value={confirm}
+          onInput={(e) => setConfirm((e.target as HTMLInputElement).value)}
+          autocomplete="new-password"
+        />
+      </Field>
+      {mismatch && <div class="notice notice-danger small" style="margin-bottom:10px;">Passwords do not match.</div>}
+      <button
+        class="btn btn-primary"
+        style="width:100%;"
+        disabled={!password || mismatch || password === ''}
+        onClick={() => { if (password && !mismatch) void store.runProtect(password); }}
+      >
+        <Icon name="lock" size={16} /> Protect PDF
+      </button>
+    </div>
+  );
+}
+
+/* -------------------------------- Unlock -------------------------------- */
+
+function UnlockPanel() {
+  const store = getStore();
+  const [password, setPassword] = useState('');
+  const [show, setShow] = useState(false);
+
+  return (
+    <div>
+      <p class="small muted" style="margin-bottom:12px;">
+        Removes password protection if you know the password. Creates a new, unprotected copy.
+        The original password-protected file is always kept.
+      </p>
+      <Field label="Password">
+        <div style="position:relative;">
+          <input
+            type={show ? 'text' : 'password'}
+            value={password}
+            onInput={(e) => setPassword((e.target as HTMLInputElement).value)}
+            autocomplete="current-password"
+            style="padding-right:40px;"
+          />
+          <button
+            type="button"
+            class="btn btn-ghost btn-sm"
+            style="position:absolute;right:4px;top:50%;transform:translateY(-50%);padding:4px 7px;"
+            onClick={() => setShow((s) => !s)}
+            aria-label={show ? 'Hide password' : 'Show password'}
+          >
+            {show ? '🙈' : '👁'}
+          </button>
+        </div>
+      </Field>
+      <button
+        class="btn btn-primary"
+        style="width:100%;"
+        disabled={!password}
+        onClick={() => { if (password) void store.runUnlock(password); }}
+      >
+        <Icon name="unlock" size={16} /> Unlock PDF
+      </button>
+    </div>
+  );
+}
+
+function scorePassword(p: string): 0 | 1 | 2 {
+  if (p.length < 6) return 0;
+  const hasLower = /[a-z]/.test(p);
+  const hasUpper = /[A-Z]/.test(p);
+  const hasDigit = /\d/.test(p);
+  const hasSymbol = /[^a-zA-Z\d]/.test(p);
+  const variety = [hasLower, hasUpper, hasDigit, hasSymbol].filter(Boolean).length;
+  if (p.length >= 12 && variety >= 3) return 2;
+  if (p.length >= 8 && variety >= 2) return 1;
+  return 0;
 }
 
 /* ------------------------------- Properties ----------------------------- */

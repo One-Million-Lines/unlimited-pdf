@@ -32,6 +32,8 @@ device capacity. Real limits still come from your device’s memory and file siz
 | **Extract text** | Save selectable text as a `.txt` in reading order. |
 | **Optimize (lossless)** | Repack with object streams; optionally strip metadata. |
 | **Compress (raster)** | Strongly shrink by rasterizing pages (with clear feature-loss warnings). |
+| **Protect (encrypt)** | Add AES-256 password protection to a PDF. |
+| **Unlock (decrypt)** | Remove password protection from a PDF (locally, with the correct password). |
 
 The navigation is generated strictly from a catalog of **implemented** tools, so
 no unfinished feature is ever exposed. See [ROADMAP](#roadmap) for what’s next.
@@ -77,9 +79,12 @@ Then load it in Chrome:
 - **Integration tests** run the real pdf-lib tools in Node and follow the
   **load → operate → export → reopen** cycle (merge, split, organize/compile,
   images→PDF, watermark, page numbers, optimize), verifying structural sanity.
+  Password validation for protect/unlock is also tested (full encryption/decryption
+  is verified in E2E tests with a real browser).
 - **End-to-end tests** (Playwright) load the built extension into Chromium and
   verify the popup, the pdf.js render pipeline in the workspace, an organize →
-  save flow, and that **no external network request** occurs during local work.
+  save flow, full protect/unlock cycles with password verification, and that
+  **no external network request** occurs during local work.
 
 ```bash
 npm test                 # unit + integration

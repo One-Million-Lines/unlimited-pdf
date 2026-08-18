@@ -12,6 +12,7 @@
 import type { PDFDocumentProxy } from '../../lib/pdfjs';
 import { loadDocument, getProperties, extractPageText, renderPageToBlob, PasswordRequiredError, type DocProperties } from '../../lib/pdfjs';
 import { WriteWorkerClient } from '../../lib/write-worker';
+import { QpdfWorkerClient } from '../../lib/qpdf-worker';
 import { OperationGraph } from '../../core/operations/graph';
 import { projectPages, collectOverlays } from '../../core/operations/project';
 import type { Operation, OverlayObject } from '../../core/operations/types';
@@ -129,6 +130,7 @@ export class WorkspaceStore {
   private doc: PDFDocumentProxy | null = null;
   private graph = new OperationGraph();
   private worker = new WriteWorkerClient();
+  private qpdfWorker = new QpdfWorkerClient();
   private net = new NetworkGuard();
   private currentCancel: (() => void) | null = null;
 
@@ -702,6 +704,50 @@ export class WorkspaceStore {
     }
   }
 
+  async runProtect(password: string): Promise<void> {
+    const started = performance.now();
+    if (!this.bytes) return;
+    const inputBytes = this.bytes.byteLength;
+    const out = await this.runJob('Protecting PDF with AES-256…', async (_report, signal) => {
+      const bytes = await this.currentBytes();
+      const p = this.qpdfWorker.protect(bytes, password);
+      // Support cancellation via a race.
+      return await Promise.race([
+        p,
+        new Promise<Uint8Array>((_, reject) => {
+          signal.addEventListener('abort', () => reject(new ToolError('cancelled', 'Cancelled.')), { once: true });
+        }),
+      ]);
+    });
+    if (out) {
+      this.finishResult('Protected PDF', [{ name: outputName(this.state.docName, 'protected'), bytes: out }], inputBytes, started, [
+        'AES-256 password protection applied. Anyone opening the file will need the password you set.',
+        'Keep the password safe — there is no recovery mechanism for forgotten passwords.',
+      ]);
+    }
+  }
+
+  async runUnlock(password: string): Promise<void> {
+    const started = performance.now();
+    if (!this.bytes) return;
+    const inputBytes = this.bytes.byteLength;
+    const out = await this.runJob('Removing password protection…', async (_report, signal) => {
+      const bytes = await this.currentBytes();
+      const p = this.qpdfWorker.unlock(bytes, password);
+      return await Promise.race([
+        p,
+        new Promise<Uint8Array>((_, reject) => {
+          signal.addEventListener('abort', () => reject(new ToolError('cancelled', 'Cancelled.')), { once: true });
+        }),
+      ]);
+    });
+    if (out) {
+      this.finishResult('Unlocked PDF', [{ name: outputName(this.state.docName, 'unlocked'), bytes: out }], inputBytes, started, [
+        'Password protection removed. The output is an unprotected PDF — store it carefully.',
+      ]);
+    }
+  }
+
   /* ----------------------------- list editing --------------------------- */
 
   moveMergeFile(id: string, dir: -1 | 1): void {
@@ -741,6 +787,8 @@ export class WorkspaceStore {
     this.graph.clear();
     this.worker.terminate();
     this.worker = new WriteWorkerClient();
+    this.qpdfWorker.terminate();
+    this.qpdfWorker = new QpdfWorkerClient();
     this.state = { ...INITIAL };
     for (const fn of this.listeners) fn(this.state);
   }
