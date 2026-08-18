@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UnlimitedPDF — Private, local PDF toolbox for Chrome</title>
+  <meta name="description" content="UnlimitedPDF is a free, open-source Chrome extension for viewing, merging, splitting, organizing, converting, annotating, and optimizing PDFs locally on your device.">
+  <meta name="theme-color" content="#E4453A">
+  <meta property="og:title" content="UnlimitedPDF — Private, local PDF toolbox for Chrome">
+  <meta property="og:description" content="Free, open-source PDF tools that run locally in your browser. No uploads, no accounts, no usage limits imposed by us.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://onemillionlines.com/unlimitedpdf">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="UnlimitedPDF — Private, local PDF toolbox for Chrome">
+  <meta name="twitter:description" content="A privacy-first Chrome PDF toolbox that processes files locally on your device.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="UnlimitedPDF home">
+      <span class="brand-mark" aria-hidden="true">∞</span>
+      <span>UnlimitedPDF</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary navigation">
+      <a href="#features">Features</a>
+      <a href="#tools">Tools</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#open-source">Open Source</a>
+      <!-- TODO: Replace this placeholder with the real Chrome Web Store listing URL once live. -->
+      <a class="button button-small" href="https://chromewebstore.google.com/">Add to Chrome</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero section" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Privacy-first PDF tools for Chrome</p>
+        <h1 id="hero-title">Work with PDFs without sending them anywhere.</h1>
+        <p class="promise">“UnlimitedPDF is a free, open-source PDF toolbox that processes files locally on your device. No uploads, no accounts, no usage limits imposed by us.”</p>
+        <div class="hero-actions">
+          <!-- TODO: Replace this placeholder with the real Chrome Web Store listing URL once live. -->
+          <a class="button" href="https://chromewebstore.google.com/">Add to Chrome</a>
+          <a class="button button-secondary" href="https://github.com/One-Million-Lines/unlimited-pdf">View on GitHub</a>
+        </div>
+        <p class="privacy-line">Processed on this device. Files are not uploaded.</p>
+      </div>
+      <div class="hero-card" aria-label="UnlimitedPDF preview illustration">
+        <svg viewBox="0 0 520 420" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
+          <title id="hero-svg-title">Local PDF toolbox illustration</title>
+          <desc id="hero-svg-desc">A PDF document surrounded by local editing tools and a privacy shield.</desc>
+          <defs>
+            <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#ffffff"/>
+              <stop offset="1" stop-color="#fff3f1"/>
+            </linearGradient>
+          </defs>
+          <rect x="42" y="36" width="436" height="348" rx="34" fill="var(--surface-strong)"/>
+          <circle cx="104" cy="95" r="14" fill="var(--accent)" opacity=".25"/>
+          <circle cx="146" cy="95" r="14" fill="var(--accent)" opacity=".16"/>
+          <rect x="150" y="84" width="218" height="22" rx="11" fill="var(--muted-line)"/>
+          <path d="M172 132h116l64 64v140H172z" fill="url(#paper)" stroke="var(--card-border)" stroke-width="3"/>
+          <path d="M288 132v64h64" fill="#ffd7d3"/>
+          <path d="M204 262c25 24 45 24 64 0s43-24 68 0" fill="none" stroke="var(--accent)" stroke-width="13" stroke-linecap="round"/>
+          <rect x="82" y="163" width="96" height="72" rx="20" fill="var(--surface)" stroke="var(--card-border)" stroke-width="3"/>
+          <path d="M108 199h44M130 177v44" stroke="var(--accent)" stroke-width="10" stroke-linecap="round"/>
+          <rect x="342" y="216" width="104" height="82" rx="22" fill="var(--surface)" stroke="var(--card-border)" stroke-width="3"/>
+          <path d="M394 236l31 14v19c0 22-14 39-31 45-17-6-31-23-31-45v-19z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="5"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="features" class="trust-strip" aria-label="Key benefits">
+      <span>Local-first</span>
+      <span>No account</span>
+      <span>No watermark</span>
+      <span>No quota imposed by us</span>
+      <span>Open source</span>
+      <span>Minimal permissions</span>
+    </section>
+
+    <section id="tools" class="section" aria-labelledby="tools-title">
+      <div class="section-heading">
+        <p class="eyebrow">Shipped Phase 1 tools</p>
+        <h2 id="tools-title">A focused PDF toolbox for everyday work.</h2>
+        <p>Each tool runs in your browser and includes clear messaging when an operation may change quality or remove content.</p>
+      </div>
+      <div class="tools-grid">
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5M8 13h8M8 17h5"/></svg></span>
+          <h3>View & read PDFs</h3>
+          <p>Open PDFs in Chrome and inspect useful document properties.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 7h8M8 12h8M8 17h8"/><path d="M4 4h7v16H4zM13 4h7v16h-7z"/></svg></span>
+          <h3>Merge PDFs</h3>
+          <p>Combine multiple PDF files into one document locally.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6zM12 3v18"/><path d="M9 9l-3 3 3 3M15 9l3 3-3 3"/></svg></span>
+          <h3>Split & extract pages</h3>
+          <p>Save selected pages or ranges as a separate PDF.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10v16H7zM4 8h3M17 8h3M4 16h3M17 16h3"/><path d="M10 9h4M10 13h4"/></svg></span>
+          <h3>Organize pages</h3>
+          <p>Reorder, rotate, delete, duplicate, or reverse pages.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h9v12H4zM15 4h5v16h-5z"/><path d="M5 16l3-4 2 3 2-2 2 3M17 8h1M17 12h1M17 16h1"/></svg></span>
+          <h3>Images → PDF</h3>
+          <p>Create PDFs from JPG, PNG, or WebP images.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5zM15 3v5h5"/><path d="M8 17l3-4 2 3 2-2 2 3"/></svg></span>
+          <h3>PDF → Images</h3>
+          <p>Export pages as JPG, PNG, or WebP image files.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M12 9v7M7 17h10"/></svg></span>
+          <h3>Watermark &amp; page numbers</h3>
+          <p>Stamp text watermarks across pages and add page numbers.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>
+          <h3>Extract text</h3>
+          <p>Pull selectable PDF text into a plain TXT file.</p>
+        </article>
+        <article class="tool-card">
+          <span class="tool-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h10v18H7z"/><path d="M9 8h6M9 12h6M10 17h4"/><path d="M4 12h3M17 12h3"/></svg></span>
+          <h3>Compress / optimize</h3>
+          <p>Use raster compression with clear warnings about quality tradeoffs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="privacy" class="section split-section privacy-section" aria-labelledby="privacy-title">
+      <div>
+        <p class="eyebrow">Privacy by design</p>
+        <h2 id="privacy-title">Your files never leave your device.</h2>
+        <p>UnlimitedPDF is a static Chrome extension experience: PDF processing happens locally in the browser, without a backend service and without tracking scripts. You can keep working after install even when you are offline.</p>
+        <p>Permissions are intentionally minimal: storage for your settings and activeTab for opening the current tab’s PDF when you choose to use the extension.</p>
+        <a class="button button-secondary" href="https://onemillionlines.com/privacy/unlimitedpdf">Read the Privacy Policy</a>
+      </div>
+      <div class="privacy-panel">
+        <h3>What local-first means</h3>
+        <ul class="check-list">
+          <li>Files are processed in your browser, not uploaded to us.</li>
+          <li>No account, watermark, or daily task quota imposed by the product.</li>
+          <li>Works offline after install, subject to your device’s capacity.</li>
+          <li>Destructive or quality-changing actions include honest warnings.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="open-source" class="section split-section" aria-labelledby="opensource-title">
+      <div class="oss-card">
+        <span class="brand-mark brand-mark-large" aria-hidden="true">∞</span>
+        <h2 id="opensource-title">Free and open source.</h2>
+        <p>UnlimitedPDF is developed in the open, with source code available on GitHub. See the repository for current license details, including MIT/AGPL notes where applicable.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Build with us</p>
+        <h3>Review the code, suggest improvements, or contribute a fix.</h3>
+        <p>Privacy-first tools are stronger when the community can inspect how they work. Contributions, issues, and pull requests are welcome.</p>
+        <a class="button" href="https://github.com/One-Million-Lines/unlimited-pdf">Open the GitHub repo</a>
+      </div>
+    </section>
+
+    <section class="section faq-section" aria-labelledby="faq-title">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Common questions</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Is it really free?</summary>
+          <p>Yes. UnlimitedPDF is free and open source, with no account, watermark, or daily task quota imposed by us.</p>
+        </details>
+        <details>
+          <summary>Do my files get uploaded?</summary>
+          <p>No. PDF processing happens locally in your browser. UnlimitedPDF does not upload your files to a backend service.</p>
+        </details>
+        <details>
+          <summary>Does it work offline?</summary>
+          <p>Yes. After the Chrome extension is installed, the included tools can work offline because processing runs on your device.</p>
+        </details>
+        <details>
+          <summary>What are the limits?</summary>
+          <p>There is no product-enforced usage quota from us, but very large or complex files can be limited by your device memory, browser limits, and available processing power.</p>
+        </details>
+        <details>
+          <summary>Which permissions does it need?</summary>
+          <p>UnlimitedPDF uses minimal Chrome permissions, including storage for settings and activeTab for opening the current tab’s PDF when requested.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 UnlimitedPDF — built by Alex Rada for <a href="https://onemillionlines.com">OneMillionLines</a></p>
+    <nav aria-label="Footer links">
+      <a href="https://onemillionlines.com/privacy/unlimitedpdf">Privacy Policy</a>
+      <a href="https://github.com/One-Million-Lines/unlimited-pdf">GitHub</a>
+    </nav>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-zip/
+release/
+public/icons/
+coverage/
+test-results/
+playwright-report/
+tests/e2e/.tmp/
+*.log
+.DS_Store
+.vite/

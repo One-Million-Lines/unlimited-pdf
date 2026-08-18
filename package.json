@@ -1,0 +1,44 @@
+{
+  "name": "unlimited-pdf",
+  "version": "0.1.0",
+  "private": true,
+  "description": "UnlimitedPDF — a free, open-source, privacy-first PDF toolbox that processes files locally in Chrome. No uploads, no accounts, no server.",
+  "license": "MIT",
+  "author": "One Million Lines (onemillionlines.com)",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "icons": "node scripts/gen-icons.mjs",
+    "prebuild": "node scripts/gen-icons.mjs",
+    "build": "node scripts/build.mjs",
+    "build:zip": "node scripts/build.mjs --zip",
+    "dev": "node scripts/build.mjs --watch",
+    "clean": "node scripts/clean.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "package": "node scripts/build.mjs --zip",
+    "verify": "npm run typecheck && npm run test && npm run build"
+  },
+  "dependencies": {
+    "fflate": "0.8.3",
+    "pdf-lib": "1.17.1",
+    "pdfjs-dist": "6.2.108",
+    "preact": "10.29.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@preact/preset-vite": "2.10.6",
+    "@types/chrome": "0.2.6",
+    "esbuild": "0.21.5",
+    "jsdom": "25.0.1",
+    "playwright": "1.62.1",
+    "typescript": "5.9.3",
+    "vite": "5.4.21",
+    "vitest": "2.1.9"
+  }
+}

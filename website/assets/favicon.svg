@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="UnlimitedPDF favicon">
+  <rect width="64" height="64" rx="16" fill="#e4453a"/>
+  <path d="M20 14h18l10 10v26H20z" fill="#fff"/>
+  <path d="M38 14v10h10" fill="#ffd7d3"/>
+  <path d="M18 37c5 5 10 5 14 0s9-5 14 0" fill="none" stroke="#e4453a" stroke-width="4" stroke-linecap="round"/>
+</svg>
